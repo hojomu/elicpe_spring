@@ -15,5 +15,9 @@ public class LoginServiceImpl implements LoginService{
 	public void memIn(LoginVO member) {
 		lm.memId(member);
 	}
+	
+	public LoginVO login(LoginVO member) {
+		return lm.login(member);
+	}
 
 }

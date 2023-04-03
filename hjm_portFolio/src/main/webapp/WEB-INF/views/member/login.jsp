@@ -13,11 +13,11 @@
   <h2>Login</h2>
   <form action="http://localhost:8080/login" method="post">
     <div class="user-box">
-      <input type="text" name="" required="">
+      <input type="text" name="id" required="">
       <label>Username</label>
     </div>
     <div class="user-box">
-      <input type="password" name="" required="">
+      <input type="password" name="password" required="">
       <label>Password</label>
     </div>
     <button id="lginbtn">

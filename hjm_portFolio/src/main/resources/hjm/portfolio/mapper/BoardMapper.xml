@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="hjm.portfolio.mapper.BoardMapper">
+  	<insert id="write">
+  		<selectKey keyProperty="board_no" order="BEFORE" resultType="int">
+  			select max(board_no)+1 board_no
+  			from port_board
+  		</selectKey>
+  		
+  		insert into port_board(board_no, title, contents, id)
+  		values(#{board_no}, #{title}, #{contents}, #{id})
+  	</insert>
+  
+  
+  </mapper>

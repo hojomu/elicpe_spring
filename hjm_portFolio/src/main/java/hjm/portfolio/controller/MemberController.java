@@ -24,8 +24,17 @@ public class MemberController {
 	
 	// 로그인
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String logIn(LoginVO member, HttpSession session) {
+	public String loginPost(LoginVO member, HttpSession session) {
 		
+		session.setAttribute("login", ls.login(member).getId());
+		
+		if (ls.login(member)==null) {
+			System.out.println("bad");
+			return "member/login";
+		} else {
+			System.out.println("good");
+			return "redirect:/board/list";
+		}
 	}
 	
 	

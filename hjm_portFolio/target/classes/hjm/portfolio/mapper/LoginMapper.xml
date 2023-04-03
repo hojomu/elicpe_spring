@@ -11,5 +11,11 @@
   		insert into port_member (id, password, name, phone, email)
   		values(#{id},#{password},#{name},#{phone},#{email});
   	</insert>
+  	
+  	<select id="login" resultType="hjm.portfolio.model.LoginVO">
+  		select id, password
+  		from port_member
+  		where id=#{id} and password=#{password}
+  	</select>
   
   </mapper>
