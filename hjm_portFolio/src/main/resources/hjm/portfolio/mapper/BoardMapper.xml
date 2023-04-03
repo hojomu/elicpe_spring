@@ -15,6 +15,37 @@
   		insert into port_board(board_no, title, contents, id)
   		values(#{board_no}, #{title}, #{contents}, #{id})
   	</insert>
+  	
+  	<select id="list" resultType="hjm.portfolio.model.BoardVO">
+  		select *
+  		from(
+  			select @rownum:=@rownum+1 rownum, b.*
+  			from board b, (select @rownum:=0) as tmp
+  			<if test="keyword != null">
+  				<choose>
+  					<when test="type=='T'.toString()">
+  						where title like concat('%',#{keyword},'%')
+  					</when>
+  					<when test="type=='C'.toString()">
+  						where title like concat('%',#{keyword},'%')
+  					</when>
+  					<otherwise>
+  						where title like concat('%',#{keyword},'%')
+  						OR content like concat('%',#{keyword},'%')
+  					</otherwise>
+  				</choose>
+  			</if>
+  			order by board_no desc
+  		) as boardlist
+  		<![CDATA[
+  		where rownum > (#{pageNum}-1)*#{amount} and rownum <= #{pageNum}*#{amount}
+  		]]>
+  	</select>
+  	
+  	<select id="total" resultType="int">
+  	
+  	</select>
+  	
   
   
   </mapper>

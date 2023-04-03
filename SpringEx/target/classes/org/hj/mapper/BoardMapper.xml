@@ -69,6 +69,7 @@
   			delete from board
   			where bno=#{bno}
   		</delete>
+  		
   		<select id="total" resultType="int">
   			select count(*) from board
   			<if test="keyword != null">

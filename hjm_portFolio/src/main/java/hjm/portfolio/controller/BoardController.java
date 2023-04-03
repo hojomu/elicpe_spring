@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import hjm.portfolio.model.BoardVO;
+import hjm.portfolio.model.CriteriaVO;
+import hjm.portfolio.model.PageVO;
 import hjm.portfolio.service.BoardService;
 
 @Controller
@@ -17,13 +19,13 @@ public class BoardController {
 	
 	// 게시판 메인
 	@RequestMapping(value="/board/list", method = RequestMethod.GET)
-	public String list (Model model/*, CriteriaVO cri*/) {
+	public String list (Model model, CriteriaVO cri) {
 		
 		model.addAttribute("list", bs.list(cri));
 		
 		int total=bs.total(cri);
 		
-		//model.addAttribute("paging", new PageVO(cri, total));
+		model.addAttribute("paging", new PageVO(cri, total));
 		return "board/list";
 	}
 	
