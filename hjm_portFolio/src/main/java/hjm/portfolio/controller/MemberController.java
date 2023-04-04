@@ -26,14 +26,13 @@ public class MemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginPost(LoginVO member, HttpSession session) {
 		
-		session.setAttribute("login", ls.login(member).getId());
-		
 		if (ls.login(member)==null) {
 			System.out.println("bad");
 			return "member/login";
 		} else {
 			System.out.println("good");
-			return "redirect:/board/list";
+			session.setAttribute("login", ls.login(member).getId());
+			return "redirect:/";
 		}
 	}
 	

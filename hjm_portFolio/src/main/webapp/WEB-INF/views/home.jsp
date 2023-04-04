@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>R Studio - Free HTML5 Creative Digital Web Agency Template</title>
+        <title>메인화면</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -95,8 +95,8 @@
                                 <p>lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
                                     lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                                 <a href="http://localhost:8080/login" class="btn btn-default waves-effect waves-purple">로그인</a>
-                                <a href="#!" class="btn btn-default waves-effect waves-purple">회원가입</a>
-                                <a href="#!" class="btn btn-default waves-effect waves-purple">게시판</a>
+                                <a href="http://localhost:8080/member" class="btn btn-default waves-effect waves-purple">회원가입</a>
+                                <a href="http://localhost:8080/board/list" class="btn btn-default waves-effect waves-purple">게시판</a>
                             </div>
 
                         </div><!-- End of col-sm-12 -->

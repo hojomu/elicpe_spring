@@ -15,13 +15,13 @@
   		insert into port_board(board_no, title, contents, id)
   		values(#{board_no}, #{title}, #{contents}, #{id})
   	</insert>
-  	
+<!-- 게시판 데이터 전체 내림 차순으로 불러오기 -->
   	<select id="list" resultType="hjm.portfolio.model.BoardVO">
   		select *
   		from(
   			select @rownum:=@rownum+1 rownum, b.*
-  			from board b, (select @rownum:=0) as tmp
-  			<if test="keyword != null">
+  			from port_board b, (select @rownum:=0) as tmp
+  			<!-- <if test="keyword != null">
   				<choose>
   					<when test="type=='T'.toString()">
   						where title like concat('%',#{keyword},'%')
@@ -34,18 +34,53 @@
   						OR content like concat('%',#{keyword},'%')
   					</otherwise>
   				</choose>
-  			</if>
+  			</if> -->
   			order by board_no desc
   		) as boardlist
   		<![CDATA[
   		where rownum > (#{pageNum}-1)*#{amount} and rownum <= #{pageNum}*#{amount}
   		]]>
   	</select>
-  	
+<!-- 데이터의 총 개수 불러오기 -->
   	<select id="total" resultType="int">
-  	
+  		select count(*) from port_board
+  		<!-- <if test="keyword != null">			
+			<choose>
+				<when test="type=='T'.toString()">
+					 where title like concat('%',#{keyword},'%')
+				</when>
+				<when test="type=='C'.toString()">
+					where content like concat('%',#{keyword},'%')
+				</when>
+				<otherwise>
+					where title like concat('%',#{keyword},'%')
+			      OR  content like concat('%',#{keyword},'%')
+				</otherwise>
+			</choose>
+			</if> -->
   	</select>
   	
-  
+<!-- 글의 상세 내용 불러오기, 글 상세 보기 시 조회수 증가 -->
+  	
+  	<select id="detail" resultType="hjm.portfolio.model.BoardVO">
+  		select * from port_board
+  		where board_no = #{board_no}
+  	</select>
+  	<update id="cntup">
+  		update port_board
+  		set counts = counts + 1
+  		where board_no = #{board_no}
+  	</update>
+  	
+  	<update id="modify">
+  		update port_board
+  		set title=#{title}, contents=#{contents}
+  		where board_no=#{board_no}
+  	</update>
+  	
+  	<delete id="remove">
+  		delete from port_board
+  		where board_no=#{board_no}
+  	</delete>
   
   </mapper>

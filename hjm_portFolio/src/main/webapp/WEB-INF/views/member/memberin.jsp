@@ -37,14 +37,14 @@
       <span></span>
       <span></span>
       <span></span>
-     	Submit
+     	완료
     </button>
     <button id="resetbtn" type="reset">
       <span></span>
       <span></span>
       <span></span>
       <span></span>
-     Reset
+     리셋
     </button>
   </form>
 </div>

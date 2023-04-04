@@ -9,7 +9,7 @@
   
   	<insert id="memId">
   		insert into port_member (id, password, name, phone, email)
-  		values(#{id},#{password},#{name},#{phone},#{email});
+  		values(#{id},#{password},#{name},#{phone},#{email})
   	</insert>
   	
   	<select id="login" resultType="hjm.portfolio.model.LoginVO">

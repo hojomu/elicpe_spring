@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>   
+ <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,13 +9,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>게시판</title>
+        <title>상세보기</title>
 		<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="/resources/css/listCss.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
-    <body class="sb-nav-fixed">
+<body>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
             <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
@@ -112,78 +112,61 @@
                 </nav>
             </div>
             <div id="layoutSidenav_content">
-                <main>
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">게시판</h1>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                               		 자유게시판 입니다.
-                            </div>
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
-                                글 목록 <a href="http://localhost:8080/write">글쓰기</a>
-                            </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple" style="width:80%">
-                                    <thead>
-                                        <tr>
-                                            <th style="width:10%" >글번호</th>
-                                            <th style="width:40%">제목</th>
-                                            <th style="width:10%">작성자</th>
-                                            <th style="width:15%">작성일</th>
-                                            <th style="width:10%">조회</th>
-                                            <th style="width:10%">좋아요</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-								             <!-- for문 시작 -->
-										<c:forEach items="${list}" var="boardlist">
-											<tr>
-												<td>${boardlist.board_no}</td>
-												<td><a href="/board/detail?board_no=${boardlist.board_no}">${boardlist.title}</a></td>
-												<td>${boardlist.id}</td>
-												<td>${boardlist.updated_time}</td>
-												<td>${boardlist.counts}</td>
-												<td>${boardlist.likes}</td>
-											</tr>
-										</c:forEach>
-											<!-- for문 끝 -->
-                                    </tbody>
-                                </table>
-             					<!-- prev(이전)이 true이면 이전버튼 활성화 -->
-									<c:if test="${paging.prev}">
-										<a href="/board/list?type=${paging.cri.type}&keyword=${paging.cri.keyword}&pageNum=${paging.startPage-1}&amount=${paging.cri.amount}">이전</a>
-									</c:if>
-									
-									<!-- begin(1)이 end(10)될 동안 반복(1일 10일 될 동안 반복) -->
-									<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
-									 	<a href="/board/list?type=${paging.cri.type}&keyword=${paging.cri.keyword}&pageNum=${num}&amount=${paging.cri.amount}">${num}</a>
-									</c:forEach>
-									
-									<!-- next(다음)이 true이면 다음버튼 활성화 -->
-									<c:if test="${paging.next}">
-										<a href="/board/list?type=${paging.cri.type}&keyword=${paging.cri.keyword}&pageNum=${paging.endPage+1}&amount=${paging.cri.amount}">다음</a>
-									</c:if>
-                            </div>
-                        </div>
-                    </div>
+            	<main>
+            		<form method="post">
+	                    <div class="container-fluid px-4">
+	                        <h1 class="mt-4"><span class="tohidden">${detail.title}</span><input id="titleinput" type="hidden" name="title" value="${detail.title}"></h1>
+	                        <div class="card mb-4">
+	                            <div>
+	                            	<div>
+	                            		<p style="margin-bottom:2px">${detail.id}<input type="hidden" name="id" value="${detail.id}"></p>
+	                            		<span>${detail.updated_time}<input type="hidden" name="update_time" value="${detail.updated_time}"></span>
+	                            		<span>조회 ${detail.counts}<input type="hidden" name="counts" value="${detail.counts}"></span>
+	                            		<input type="hidden" name="board_no" value="${detail.board_no }">
+	                            	</div>
+	                            	
+	                            	<div></div>
+	                            </div>
+	                        </div>
+	                        <div class="card mb-4">
+	                            <div class="card-header" style="height:5px">
+	                            </div>
+	                            <div class="card-body">
+	             					<div class="tohidden">${detail.contents}</div>
+	             					<textarea id="contentsinput" rows="30" cols="80" style="display:none" name="contents">${detail.contents}</textarea>
+	                            </div>
+	                        </div>
+	                    </div>
+				<c:set var="article_id" value="${detail.id}" />
+				<c:if test="${article_id eq sessionScope.login}">
+                   	 <input id="modifybtn" type="button" value="수정">
+                   	 <input id="removebtn" type="submit" value="삭제" formaction="/board/remove">
+				</c:if>
+					<input type="hidden" id="modifycomplete" value="수정 완료" formaction="/board/modify">
+                    </form>
                 </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid px-4">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2023</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
             </div>
-        </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    </body>
+         </div>
+         <script>
+         	const modifybtn = document.getElementById("modifybtn");
+         	const titleinput = document.getElementById("titleinput");
+         	const contentsinput = document.getElementById("contentsinput");
+         	const modifycomplete = document.getElementById("modifycomplete");      	
+         	const tohidden = document.querySelectorAll(".tohidden");
+         	const removebtn = document.getElementById("removebtn");
+         	
+         	modifybtn.addEventListener("click", function() {
+         		
+         		titleinput.setAttribute("type","text");
+         		contentsinput.style.display = "block";
+         		modifybtn.style.display = "none";
+         		modifycomplete.setAttribute("type", "submit");
+         		removebtn.setAttribute("type","hidden");
+         		
+         		for (let i = 0; i < tohidden.length; i++){
+         			tohidden[i].style.display = "none";
+         		}
+         	});
+         </script>
+</body>
 </html>

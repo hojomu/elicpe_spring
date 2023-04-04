@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import hjm.portfolio.model.BoardVO;
 import hjm.portfolio.model.CriteriaVO;
@@ -43,4 +44,28 @@ public class BoardController {
 		
 		return "redirect:/board/list";
 	}
+	
+	// 게시글 Detail
+	@RequestMapping(value = "/board/detail", method = RequestMethod.GET)
+	public String detail (BoardVO board, Model model) {
+		model.addAttribute("detail", bs.detail(board));
+		return "board/detail";
+	}
+	
+	// 게시글 수정
+	@RequestMapping(value = "/board/modify", method = RequestMethod.POST)
+	public String modify(BoardVO board, RedirectAttributes rttr) {
+		bs.modify(board);
+		System.out.println(board);
+		rttr.addAttribute("board_no", board.getBoard_no());
+		return "redirect:/board/detail";
+	}
+	
+	// 게시글 삭제
+	@RequestMapping(value = "/board/remove", method = RequestMethod.POST)
+	public String remove(BoardVO board) {
+		bs.remove(board);
+		return "redirect:/board/list";
+	}
+	
 }
