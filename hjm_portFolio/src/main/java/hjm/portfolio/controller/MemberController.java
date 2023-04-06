@@ -30,8 +30,8 @@ public class MemberController {
 			System.out.println("bad");
 			return "member/login";
 		} else {
-			System.out.println("good");
 			session.setAttribute("login", ls.login(member).getId());
+			System.out.println(session.getAttribute("login"));
 			return "redirect:/";
 		}
 	}

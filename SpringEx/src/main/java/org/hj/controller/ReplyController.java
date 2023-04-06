@@ -54,6 +54,7 @@ public class ReplyController {
 		return result==1? new ResponseEntity<>("success",HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+	// 댓글 삭제
 	@RequestMapping(value = "/replies/remove", method = RequestMethod.DELETE)
 	public ResponseEntity<String> replyremove(@RequestBody ReplyVO reply){
 		System.out.println("삭제="+reply);

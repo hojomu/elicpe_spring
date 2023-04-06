@@ -185,6 +185,7 @@ address {
 ol,
 ul {
   padding-left: 2rem;
+	list-style: none;
 }
 
 ol,
@@ -198,7 +199,13 @@ ol ol,
 ul ul,
 ol ul,
 ul ol {
-  margin-bottom: 0;
+	margin-bottom: 0;
+}
+
+li {
+	list-style: none;
+	margin:0;
+	padding:0;
 }
 
 dt {

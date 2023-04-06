@@ -14,6 +14,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="/resources/css/listCss.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="/resources/js/reply.js"></script>
     </head>
 <body>
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -136,6 +137,7 @@
 	             					<textarea id="contentsinput" rows="30" cols="80" style="display:none" name="contents">${detail.contents}</textarea>
 	                            </div>
 	                        </div>
+	                               
 	                    </div>
 				<c:set var="article_id" value="${detail.id}" />
 				<c:if test="${article_id eq sessionScope.login}">
@@ -143,10 +145,32 @@
                    	 <input id="removebtn" type="submit" value="삭제" formaction="/board/remove">
 				</c:if>
 					<input type="hidden" id="modifycomplete" value="수정 완료" formaction="/board/modify">
-                    </form>
+                    </form> 
+                <div id="uploadResult">
+                	<ul>
+                	</ul>
+                </div>
+                
+                <div>
+               		 <div id="chat">
+                		<ul id="replyUL">
+                		</ul>
+                	</div>
+                	<div id="replyPage"></div>
+                	
+                	<div><label>댓글 쓰기</label></div>
+                	<div>
+                		<textarea rows="3" cols="50" id="content"></textarea>
+                	</div>
+                	<div>
+                		<input type="button" value="댓글쓰기" id="add">
+                	</div>
+                	
+                </div>
+                
                 </main>
-            </div>
-         </div>
+               
+                
          <script>
          	const modifybtn = document.getElementById("modifybtn");
          	const titleinput = document.getElementById("titleinput");
