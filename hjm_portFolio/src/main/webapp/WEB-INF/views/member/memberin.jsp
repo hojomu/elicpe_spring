@@ -5,29 +5,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-        <link rel="stylesheet" href="/resources/css/memberin.css">
 </head>
 <body>
-<div class="memberin-box">
+<div>
   <h2>Join In</h2>
   <form action="/memberin" method="post">
-    <div class="user-box">
+    <div>
       <input type="text" name="id" required>
       <label>ID</label>
     </div>
-    <div class="user-box">
+    <div>
       <input type="password" name="password" required>
       <label>PASS WORD</label>
     </div>
-    <div class="user-box">
+    <div>
       <input type="text" name="name" required>
       <label>NAME</label>
     </div>
-    <div class="user-box">
+    <div>
       <input type="text" name="phone" required>
       <label>PHONE</label>
     </div>
-    <div class="user-box">
+    <div>
       <input type="text" name="email" required>
       <label>E-mail</label>
     </div>

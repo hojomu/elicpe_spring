@@ -2,8 +2,6 @@
  * 
  */
 
-const user_Id = sessionStorage.getItem('login')
-
 $(document).ready(function(){	// jquery 준비...
 	// 함수 호출
 	// detail.jsp가 시작되자마자 bno값을 가져올려면 $(document).ready 아래에 선언
@@ -15,8 +13,7 @@ $(document).ready(function(){	// jquery 준비...
 	// 댓글 쓰기버튼을 클릭하면 
 	$("#add").on("click",function(){
 		// 댓글쓰기 버튼을 클릭했을 당시에 댓글내용을 가져올려면 $("#add").on("click",function(){ 아래에 선언
-		var contentValue=$("#content").val();
-		
+		var contentValue=$("#replycontents").val();
 		// 댓글쓰기를 하기 위한 함수 호출
 		add({board_no:board_noValue,content:contentValue});
 	})
@@ -47,8 +44,6 @@ $(document).ready(function(){	// jquery 준비...
 		e.preventDefault();
 		var board_noValue=$("input[name='board_no']").val();
 		var pageValue = $(this).attr("href");
-		console.log(board_noValue)
-		console.log(pageValue)
 		list({board_no:board_noValue,page:pageValue});
 	})
 
@@ -57,7 +52,6 @@ $(document).ready(function(){	// jquery 준비...
 // 함수 선언
 // 댓글 삭제를 하기 위한 함수 선언
 function remove(reply){
-	console.log(reply);
 	$.ajax({
 		type:"delete",
 		url:"/replies/remove/",
@@ -90,26 +84,29 @@ function modify(reply){
 		}
 	})
 }
-
 function list(param){// list함수 선언 시작
 	//alert(bno);
 	var board_no = param.board_no;
 	var page = param.page;
 	
-	console.log(board_no)
-	console.log(page)
+	console.log(board_no);
+	console.log(page);
 	
 	$.getJSON("/replies/"+board_no+"/"+page+".json",function(data){
 		
 		var str="";
 		
 		for(var i=0;i<data.list.length;i++){
-			str+="<li>"+data.list[i].id+"</li>"
-			str+="<li><textarea rows='3' cols='50' id='replycontent"+data.list[i].rno+"'>"+data.list[i].content+"</textarea></li>"
 			str+="<li>"
-			str+="<input class='update' type='button' value='수정' data-rno="+data.list[i].rno+">"
-			str+="<input class='remove' type='button' value='삭제' data-rno="+data.list[i].rno+">"
-			str+="</li>"
+			// 댓글 주인의 프로필 사진을 추가하고 싶다면 이 자리에 태그 추가 할 것
+			str+="<div class='reply-detail'>"
+			str+="<div class='reply-id'><span>"+data.list[i].id+"</span></div>"
+			str+="<div class='reply-content'>"+data.list[i].content+"</div>"
+			str+="<div class='reply-btn'>"
+			str+="<input class='update btn btn-light' type='button' value='수정' data-rno="+data.list[i].rno+">"
+			str+="<input class='remove btn btn-light' type='button' value='삭제' data-rno="+data.list[i].rno+">"
+			str+="</div></div></li>"
+				
 		}
 		
 		$("#replyUL").html(str);
@@ -132,9 +129,6 @@ function showReplyPage(replycnt,pageNum){
 	if(endNum * 10 < replycnt){
 		next=true;
 	}
-	console.log(pageNum)
-	console.log(startNum)
-	console.log(endNum)
 	var str="<ul>";
 	
 	if(prev){
@@ -149,20 +143,19 @@ function showReplyPage(replycnt,pageNum){
 		str+="<li><a href='"+(endNum+1)+"'>Next</a></li>";
 	}
 	str+="</ul><div>"
-	console.log(str);
 	$("#replyPage").html(str);
 		
 }
 
 // 댓글 쓰기를 하기 위한 함수 선언
-function add(reply){	
+function add(reply){	// add함수 선언 시작
+	console.log(reply);
 	$.ajax({
 		type:"post",	// method방식(get, post, put, delete)
 		url:"/replies/new",
 		data:JSON.stringify(reply),
-		// contentType : ajax -> controller로 데이터 전송 시 타입
-		// (contentType을 생략하면 web Browser한테 위임)
 		contentType:"application/json; charset=utf-8",
+		
 		success:function(result){
 			if(result=="success"){
 				alert("댓글쓰기 성공")
@@ -170,4 +163,4 @@ function add(reply){
 			}
 		}
 	})
-}	// add함수 선언 끝
+}

@@ -32,7 +32,7 @@ public class MemberController {
 		} else {
 			session.setAttribute("login", ls.login(member).getId());
 			System.out.println(session.getAttribute("login"));
-			return "redirect:/";
+			return "redirect:/board/list";
 		}
 	}
 	
