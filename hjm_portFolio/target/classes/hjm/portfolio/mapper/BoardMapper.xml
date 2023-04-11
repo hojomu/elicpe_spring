@@ -18,7 +18,7 @@
   	<select id="list" resultType="hjm.portfolio.model.BoardVO">
   		select *
   		from(
-  			select @rownum:=@rownum+1 rownum, b.*
+  			select @rownum:=@rownum+1 rownum, b.board_no, b.title, b.contents, b.id, DATE_FORMAT(b.updated_time,'%y-%m-%d') AS updated_time, b.likes, b.counts
   			from port_board b, (select @rownum:=0) as tmp
   			<!-- <if test="keyword != null">
   				<choose>
@@ -73,7 +73,7 @@
   	
   	<update id="modify">
   		update port_board
-  		set title=#{title}, contents=#{contents}
+  		set title=#{title}, contents=#{contents} , updated_time = now()
   		where board_no=#{board_no}
   	</update>
   	

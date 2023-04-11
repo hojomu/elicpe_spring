@@ -1,6 +1,7 @@
 
 package org.hj.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.hj.model.LoginVO;
@@ -33,8 +34,6 @@ public class MemberController {
 	}
 	
 	
-	
-	
 	// 로그인 페이지
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login () {
@@ -46,9 +45,6 @@ public class MemberController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginPost (HttpSession session, LoginVO member) {
 		
-/*		System.out.println("contorller="+member);
-		System.out.println(ls.login(member));*/
-		
 		session.setAttribute("login", ls.login(member));
 		
 		if (ls.login(member)==null) {
@@ -58,6 +54,23 @@ public class MemberController {
 			}							 // 남기지 않기 위해 redirect를 이용함.
 										 // Post 방식 내부에서 자주 사용한다.
 		
+		}
+	
+	//로그아웃 기능
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout (HttpSession session) {
+		session.invalidate();
+		return "home";
+	}
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout (HttpSession session, HttpServletRequest request) {
+		// 세션 초기화
+		System.out.println("logout");
+		session.invalidate();
+		// // 이전 페이지 주소 저장
+		/*String referer = request.getHeader("Referer");*/
+		
+			return "home";
 		}
 	
 	// 회원관리페이지

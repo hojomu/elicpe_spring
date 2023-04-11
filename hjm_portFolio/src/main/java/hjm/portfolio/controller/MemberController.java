@@ -1,5 +1,6 @@
 package hjm.portfolio.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,16 @@ public class MemberController {
 		}
 	}
 	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout (HttpSession session, HttpServletRequest request) {
+		// 세션 초기화
+		System.out.println("logout");
+		session.invalidate();
+		// // 이전 페이지 주소 저장
+		String referer = request.getHeader("Referer");
+		
+		return "redirect:"+referer;
+	}
 	
 	// 회원가입 화면으로 이동
 	@RequestMapping(value = "/member", method = RequestMethod.GET)

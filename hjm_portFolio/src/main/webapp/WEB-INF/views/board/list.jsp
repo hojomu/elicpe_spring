@@ -212,16 +212,24 @@
         </li><!-- End Messages Nav -->
 
         <li class="nav-item dropdown pe-3">
-
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="/resources/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-          </a><!-- End Profile Iamge Icon -->
+		  
+		  <c:choose>
+			  <c:when test="${sessionScope.login == null }">
+			  <button class="main-login-btn" type="button" onclick="location.href='http://localhost:8080/login'">로그인</button>
+			  </c:when>
+			  <c:when test="${sessionScope.login != null }">
+		          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+		            <img src="/resources/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+		            <span class="d-none d-md-block dropdown-toggle ps-2">${sessionScope.login }</span>
+		          </a>
+			  </c:when>
+          </c:choose>
+<!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <h6>${sessionScope.login }</h6>
+              <span>Job</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -258,9 +266,9 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="http://localhost:8080/logout">
                 <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
+                <span>Log Out</span>
               </a>
             </li>
 
@@ -322,13 +330,6 @@
       <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
-          <i class="bi bi-person"></i>
-          <span>Profile</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
-
-      <li class="nav-item">
         <a class="nav-link collapsed" href="pages-faq.html">
           <i class="bi bi-question-circle"></i>
           <span>F.A.Q</span>
@@ -341,20 +342,34 @@
           <span>Contact</span>
         </a>
       </li><!-- End Contact Page Nav -->
+      
+	  <c:choose>
+		<c:when test="${sessionScope.login == null }">
+		  <li class="nav-item">
+            <a class="nav-link collapsed" href="http://localhost:8080/member">
+            <i class="bi bi-card-list"></i>
+            <span>회원가입</span>
+            </a>
+          </li><!-- End Register Page Nav -->
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="http://localhost:8080/memberin">
-          <i class="bi bi-card-list"></i>
-          <span>회원가입</span>
-        </a>
-      </li><!-- End Register Page Nav -->
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="http://localhost:8080/login">
+            <i class="bi bi-box-arrow-in-right"></i>
+            <span>로그인</span>
+            </a>
+          </li><!-- End Login Page Nav -->
+		</c:when>
+			  
+		<c:when test="${sessionScope.login != null }">
+		   <li class="nav-item">
+       		 <a class="nav-link collapsed" href="users-profile.html">
+     	     <i class="bi bi-person"></i>
+     	     <span>Profile</span>
+     	     </a>
+   		   </li><!-- End Profile Page Nav -->       
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="http://localhost:8080/login">
-          <i class="bi bi-box-arrow-in-right"></i>
-          <span>로그인</span>
-        </a>
-      </li><!-- End Login Page Nav -->
+		</c:when>
+       </c:choose>
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="pages-error-404.html">
@@ -727,48 +742,6 @@
 
   <!-- Template Main JS File -->
   <script src="/resources/js/main.js"></script>
-
-<%--                                 글 목록 <a href="http://localhost:8080/write">글쓰기</a><input type="button" value="로그인" onclick="location.href='http://localhost:8080/login'">
-                                <table id="datatablesSimple" style="width:80%">
-                                    <thead>
-                                        <tr>
-                                            <th style="width:10%" >글번호</th>
-                                            <th style="width:40%">제목</th>
-                                            <th style="width:10%">작성자</th>
-                                            <th style="width:15%">작성일</th>
-                                            <th style="width:10%">조회</th>
-                                            <th style="width:10%">좋아요</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-								             <!-- for문 시작 -->
-										<c:forEach items="${list}" var="boardlist">
-											<tr>
-												<td>${boardlist.board_no}</td>
-												<td><a href="/board/detail?board_no=${boardlist.board_no}">${boardlist.title}</a></td>
-												<td>${boardlist.id}</td>
-												<td>${boardlist.updated_time}</td>
-												<td>${boardlist.counts}</td>
-												<td>${boardlist.likes}</td>
-											</tr>
-										</c:forEach>
-											<!-- for문 끝 -->
-                                    </tbody>
-                                </table>
-             					<!-- prev(이전)이 true이면 이전버튼 활성화 -->
-									<c:if test="${paging.prev}">
-										<a href="/board/list?type=${paging.cri.type}&keyword=${paging.cri.keyword}&pageNum=${paging.startPage-1}&amount=${paging.cri.amount}">이전</a>
-									</c:if>
-									
-									<!-- begin(1)이 end(10)될 동안 반복(1일 10일 될 동안 반복) -->
-									<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="num">
-									 	<a href="/board/list?type=${paging.cri.type}&keyword=${paging.cri.keyword}&pageNum=${num}&amount=${paging.cri.amount}">${num}</a>
-									</c:forEach>
-									
-									<!-- next(다음)이 true이면 다음버튼 활성화 -->
-									<c:if test="${paging.next}">
-										<a href="/board/list?type=${paging.cri.type}&keyword=${paging.cri.keyword}&pageNum=${paging.endPage+1}&amount=${paging.cri.amount}">다음</a>
-									</c:if> --%>
 
 
     </body>

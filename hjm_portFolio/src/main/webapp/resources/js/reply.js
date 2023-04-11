@@ -129,20 +129,20 @@ function showReplyPage(replycnt,pageNum){
 	if(endNum * 10 < replycnt){
 		next=true;
 	}
-	var str="<ul>";
+	var str="<ul class='pagination'>";
 	
 	if(prev){
-		str+="<li><a href='"+(startNum-1)+"'>Previous</a></li>";
+		str+="<li class='page-item'><a class='page-link' href='"+(startNum-1)+"'>&laquo;</a></li>";
 	}
 	
 	for(var i=startNum ; i<=endNum ; i++){
-		str+="<li><a href='"+i+"'>"+i+"</a></li>"
+		str+="<li class='page-item'><a class='page-link' href='"+i+"'>"+i+"</a></li>"
 	}
 	
 	if(next){
-		str+="<li><a href='"+(endNum+1)+"'>Next</a></li>";
+		str+="<li class='page-item'><a class='page-link' href='"+(endNum+1)+"'>&raquo;</a></li>";
 	}
-	str+="</ul><div>"
+	str+="</ul>"
 	$("#replyPage").html(str);
 		
 }

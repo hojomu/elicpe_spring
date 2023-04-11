@@ -1338,3 +1338,25 @@ hojomu css
 #replyUL > li:first-child{
 	border-top: none;
 }
+
+/* 로그인 버튼 css */
+
+.main-login-btn {
+  border: 1px solid #45505b;
+  border-radius: 30px;
+  padding: 10px;
+  font-size: 15px;
+  color: #45505b;
+  line-height: 1;
+  transition: 0.3s;
+  font-weight:700;
+  background-color:transparent;
+}
+
+.main-login-btn:hover {
+  color: #0563bb;
+  border: 1px solid #0563bb;
+}
+
+
+

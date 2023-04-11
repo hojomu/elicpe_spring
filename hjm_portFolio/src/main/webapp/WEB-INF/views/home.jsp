@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,8 +69,15 @@
         <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
         <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
         <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+        <a href="http://localhost:8080/board/list" ><i class='bx bxs-dashboard'></i></a>
+        <c:choose>
+        	<c:when test="${sessionScope.login == null }">
+        		<button class="main-login-btn" type="button" onclick="location.href='http://localhost:8080/login'">로그인</button>
+      		</c:when>
+        	<c:when test="${sessionScope.login != null }">
+        		<button class="main-logout-btn" type="button" onclick="location.href='http://localhost:8080/logout'">로그아웃</button>
+      		</c:when>
+      	</c:choose>
       </div>
     </div>
   </section><!-- End Hero -->

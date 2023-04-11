@@ -403,7 +403,7 @@
 					<h5 class="card-title">글쓰기 <span>| <%= id %></span></h5>
 					<form action="write" method="post">
 						제목 <input type="text" name="title"><br>
-						<textarea rows="20" cols="40" name="contents"></textarea>
+						<textarea id="ckeditor" name="contents"></textarea>
 						<input type="hidden" name="id" value=<%= id %>>
 						<input type="submit" value="글쓰기">
 					</form>
@@ -436,6 +436,20 @@
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+	<!-- ckeditor -->
+  <script src="/resources/ckeditor/ckeditor.js"></script>
+  <script>
+  	var ckeditor_config = {
+  			fesize_enaleb : false,
+  			enterMode : CKEDITOR.ENTER_BR,
+  			shiftENterMode : CKEDITOR.ENTER_P,
+  			filebrowserUploadUrl : "/resources"
+  	};
+  </script>
+  <script>
+  	CKEDITOR.replace("ckeditor", ckeditor_config);
+  </script>
 
   <!-- Vendor JS Files -->
   <script src="/resources/vendor2/apexcharts/apexcharts.min.js"></script>

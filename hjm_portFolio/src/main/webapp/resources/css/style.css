@@ -325,6 +325,7 @@ h6 {
   line-height: 1;
   margin-right: 20px;
   transition: 0.3s;
+  vertical-align: middle;
 }
 
 #hero .social-links a:hover {
@@ -1205,3 +1206,48 @@ section {
 #footer .credits {
   font-size: 13px;
 }
+
+/* 메인 css 변경 */
+
+.main-login-a{
+
+}
+#hero .main-login-btn {
+  border: 1px solid #45505b;
+  border-radius: 30px;
+  padding: 10px;
+  font-size: 15px;
+  color: #45505b;
+  line-height: 1;
+  transition: 0.3s;
+  font-weight:700;
+  background-color:transparent;
+}
+
+#hero .main-login-btn:hover {
+  color: #0563bb;
+  border: 1px solid #0563bb;
+}
+
+#hero .main-logout-btn {
+  border: 1px solid #45505b;
+  border-radius: 30px;
+  padding: 10px;
+  font-size: 15px;
+  color: #45505b;
+  line-height: 1;
+  transition: 0.3s;
+  font-weight:700;
+  background-color:transparent;
+}
+
+#hero .main-logout-btn:hover {
+  color: #0563bb;
+  border: 1px solid #0563bb;
+}
+
+
+
+
+
+

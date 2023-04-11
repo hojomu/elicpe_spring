@@ -212,15 +212,23 @@
 
         <li class="nav-item dropdown pe-3">
 
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="/resources/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
-          </a><!-- End Profile Iamge Icon -->
+           <c:choose>
+			  <c:when test="${sessionScope.login == null }">
+			  <button class="main-login-btn" type="button" onclick="location.href='http://localhost:8080/login'">로그인</button>
+			  </c:when>
+			  <c:when test="${sessionScope.login != null }">
+		          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+		            <img src="/resources/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+		            <span class="d-none d-md-block dropdown-toggle ps-2">${sessionScope.login }</span>
+		          </a>
+			  </c:when>
+          </c:choose>
+<!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
+              <h6>${sessionScope.login }</h6>
+              <span>Job</span>
             </li>
             <li>
               <hr class="dropdown-divider">
@@ -257,9 +265,9 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="#">
+              <a class="dropdown-item d-flex align-items-center" href="http://localhost:8080/logout">
                 <i class="bi bi-box-arrow-right"></i>
-                <span>Sign Out</span>
+                <span>Log Out</span>
               </a>
             </li>
 
@@ -433,7 +441,8 @@
 								</ul>
 							</div>
 							<div id="replyPage"></div>
-					                	
+					    
+					    <c:if test="${sessionScope.login != null }">            	
 							<div><label>댓글 쓰기</label></div>
 							<div>
 								<textarea rows="3" cols="50" id="replycontents"></textarea>
@@ -441,7 +450,7 @@
 							<div>
 								<input type="button" value="댓글쓰기" id="add">
 							</div>
-					                	
+					    </c:if>            	
 						</div>
 					</div>
 				</div>
