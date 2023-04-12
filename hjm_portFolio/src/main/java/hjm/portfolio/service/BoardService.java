@@ -17,6 +17,9 @@ public interface BoardService {
 	
 	//글 내용 상세 보기
 	public BoardVO detail(BoardVO board);
+
+	//글 수정 페이지로 이동
+	public BoardVO goModify(BoardVO board);
 	
 	// 글 수정 설계
 	public void modify(BoardVO board);

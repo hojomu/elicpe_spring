@@ -39,6 +39,8 @@ public class ReplyController {
 		// 댓글 목록 리스트
 		@RequestMapping(value = "/replies/{board_no}/{page}", method = RequestMethod.GET)
 		public ResponseEntity <ReplyPageVO> getList(@PathVariable("page") int page,@PathVariable("board_no") int board_no){
+			System.out.println("reply controller page="+page);
+			System.out.println("reply controller board_no="+board_no);
 			CriteriaVO cri = new CriteriaVO(page,10);
 			return new ResponseEntity<>(rs.list(cri, board_no),HttpStatus.OK);
 		}
@@ -66,6 +68,15 @@ public class ReplyController {
 			return result==1? new ResponseEntity<>("success",HttpStatus.OK)
 					: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		
+		// 자바스크립트에 session 값 전달하기
+		@RequestMapping(value = "/getSessionData", method = RequestMethod.POST)
+		public ResponseEntity<String> getSessionData(HttpSession session){
+			String user_id = (String) session.getAttribute("login");
+			return new ResponseEntity<>(user_id,HttpStatus.OK);
+		}
+		
+		
 }
 
 

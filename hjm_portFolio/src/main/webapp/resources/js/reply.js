@@ -5,7 +5,7 @@
 $(document).ready(function(){	// jquery 준비...
 	// 함수 호출
 	// detail.jsp가 시작되자마자 bno값을 가져올려면 $(document).ready 아래에 선언
-	var board_noValue=$("input[name='board_no']").val();
+	var board_noValue= parseInt($("input[name='board_no']").val());
 	var pageValue=1;
 	// detail.jsp가 시작되자마자 댓글목록리스트(list) 함수를 호출
 	list({board_no:board_noValue,page:pageValue});
@@ -15,36 +15,53 @@ $(document).ready(function(){	// jquery 준비...
 		// 댓글쓰기 버튼을 클릭했을 당시에 댓글내용을 가져올려면 $("#add").on("click",function(){ 아래에 선언
 		var contentValue=$("#replycontents").val();
 		// 댓글쓰기를 하기 위한 함수 호출
-		add({board_no:board_noValue,content:contentValue});
+		add({board_no:board_noValue,content:contentValue,page:pageValue});
 	})
+	
+	// 댓글 수정버튼 오픈
+	$("#chat").on("click",".updateOpen",function(){
+		document.querySelector("#reply-content-view").classList.add("dis-none");
+		document.querySelector("#reply-content").classList.remove("dis-none");
+		document.querySelector(".update").classList.remove("dis-none");
+		document.querySelector(".updateOpen").classList.add("dis-none");
+	})
+	
 	// 댓글 수정버튼을 클릭하면
 	// 이미 존재하는 태그에 이벤트를 처리하고
 	// 나중에 동적으로 생기는 태그들에 대해서 파라미터 형식으로 지정(이벤트 델리게이트)
 	$("#chat").on("click",".update",function(){
 		// 댓글번호와 댓글내용을 수집해서 
 		var rno=$(this).data("rno");
-		var content=$("#replycontent"+rno).val();
+		var content=$("#reply-content"+rno).val();
 		
 		
 		// 댓글수정를 하기 위한 함수 호출(댓글번호, 댓글내용)
-		modify({rno:rno,content:content});
+		modify({rno:rno,content:content,page:pageValue});
 	})
 	
 	// 댓글 삭제버튼을 클릭하면
 	$("#chat").on("click",".remove",function(){
 		// 댓글번호을 수집해서
 		var rno=$(this).data("rno");
-		// 댓글삭제를 하기 위한 함수 호출(댓글번호)
-		remove({rno:rno,board_no:board_noValue})
-		//remove(rno)
+			
+		var confirmed = confirm("정말로 댓글을 삭제 하시겠습니까?");
 		
+		if(confirmed){
+		// 댓글삭제를 하기 위한 함수 호출(댓글번호)
+		remove({rno:rno,board_no:board_noValue,page:pageValue})
+		//remove(rno)
+		}
 	})
+	
 	$("#replyPage").on("click","li a",function(e){
-		alert("aaa")
 		e.preventDefault();
-		var board_noValue=$("input[name='board_no']").val();
+		var board_noValue=parseInt($("input[name='board_no']").val());
 		var pageValue = $(this).attr("href");
 		list({board_no:board_noValue,page:pageValue});
+	})
+	
+	$("#chat").on("click",".updateOpen",function(){
+		
 	})
 
 
@@ -59,8 +76,8 @@ function remove(reply){
 		contentType:"application/json; charset=utf-8",
 		success:function(result){
 			if(result=="success"){
-				alert("댓글삭제 성공")
-				list(reply.board_no)
+				alert("댓글이 삭제되었습니다.");
+				list({board_no:reply.board_no,page:reply.page});
 			}
 		}
 	})
@@ -89,8 +106,6 @@ function list(param){// list함수 선언 시작
 	var board_no = param.board_no;
 	var page = param.page;
 	
-	console.log(board_no);
-	console.log(page);
 	
 	$.getJSON("/replies/"+board_no+"/"+page+".json",function(data){
 		
@@ -101,12 +116,25 @@ function list(param){// list함수 선언 시작
 			// 댓글 주인의 프로필 사진을 추가하고 싶다면 이 자리에 태그 추가 할 것
 			str+="<div class='reply-detail'>"
 			str+="<div class='reply-id'><span>"+data.list[i].id+"</span></div>"
-			str+="<div class='reply-content'>"+data.list[i].content+"</div>"
+			str+="<div class='li-mar-t_b-5' id='reply-content-view'>"+data.list[i].content+"</div>"
+			str+="<textarea class='dis-none' id='reply-content'"+data.list[i].rno+" row='3' data-reno="+data.list[i].rno+">"+data.list[i].content+"</textarea>"
+			var reply_id = data.list[i].id
+			$.ajax({
+				type: "POST",
+				url: "/getSessionData",
+				success: function(user_id){
+					if (user_id == reply_id){
+						console.log(user_id);
+						console.log(reply_id);
 			str+="<div class='reply-btn'>"
-			str+="<input class='update btn btn-light' type='button' value='수정' data-rno="+data.list[i].rno+">"
+			str+="<input class='update btn btn-light dis-none' type='button' value='제출' data-reno="+data.list[i].rno+">"
+			str+="<input class='updateOpen btn btn-light' type='button' value='수정' data-rno="+data.list[i].rno+">"
 			str+="<input class='remove btn btn-light' type='button' value='삭제' data-rno="+data.list[i].rno+">"
-			str+="</div></div></li>"
-				
+			str+="</div>"
+					}
+				}
+			});
+			str+="</div></li>"
 		}
 		
 		$("#replyUL").html(str);
@@ -159,7 +187,8 @@ function add(reply){	// add함수 선언 시작
 		success:function(result){
 			if(result=="success"){
 				alert("댓글쓰기 성공")
-				list(reply.board_no)
+				
+				list({board_no:reply.board_no,page:reply.page})
 			}
 		}
 	})

@@ -52,8 +52,15 @@ public class BoardController {
 		return "board/detail";
 	}
 	
-	// 게시글 수정
-	@RequestMapping(value = "/board/modify", method = RequestMethod.POST)
+	// 게시글 수정 페이지로 이동
+	@RequestMapping(value = "/board/modify", method = RequestMethod.GET)
+	public String goModify (BoardVO board, Model model) {
+		model.addAttribute("detail", bs.goModify(board));
+		return "board/modify";
+	}
+	
+	// 게시글 수정 기능
+	@RequestMapping(value = "/board/modify.do", method = RequestMethod.POST)
 	public String modify(BoardVO board, RedirectAttributes rttr) {
 		bs.modify(board);
 		System.out.println(board);

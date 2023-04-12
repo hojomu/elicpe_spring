@@ -48,7 +48,6 @@
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="index.html" class="logo d-flex align-items-center">
-        <img src="/resources/img/logo.png" alt="">
         <span class="d-none d-lg-block">NiceAdmin</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -163,7 +162,6 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="/resources/img/messages-1.jpg" alt="" class="rounded-circle">
                 <div>
                   <h4>Maria Hudson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -177,7 +175,6 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="/resources/img/messages-2.jpg" alt="" class="rounded-circle">
                 <div>
                   <h4>Anna Nelson</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -191,7 +188,6 @@
 
             <li class="message-item">
               <a href="#">
-                <img src="/resources/img/messages-3.jpg" alt="" class="rounded-circle">
                 <div>
                   <h4>David Muldon</h4>
                   <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
@@ -219,7 +215,6 @@
 			  </c:when>
 			  <c:when test="${sessionScope.login != null }">
 		          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-		            <img src="/resources/img/profile-img.jpg" alt="Profile" class="rounded-circle">
 		            <span class="d-none d-md-block dropdown-toggle ps-2">${sessionScope.login }</span>
 		          </a>
 			  </c:when>
@@ -455,7 +450,7 @@
                     </tbody>
                   </table>
               <!-- pagnation 시작 -->
-              <ul class="pagination">
+              <ul class="pagination flex-center-align" >
        	        <c:if test="${paging.prev}">
        	        	<li class="page-item">
 						<a class="page-link" href="/board/list?type=${paging.cri.type}&keyword=${paging.cri.keyword}&pageNum=${paging.startPage-1}&amount=${paging.cri.amount}">&laquo;</a>
@@ -480,14 +475,18 @@
               	
               	<!-- 게시판 글쓰기 및 검색 버튼 시작 -->
               	<div>
-	              	<div class="board-search-bar">
+	              	<div class="board-search-bar box-get-weight" style="margin-bottom:5px;">
+	              	  <div style="float:right;">
 	              		<form class="board-search-form d-flex align-items-center" action="#">
-	              			<input type="text" name="query" placeholder="Search" title="Enter search keyword">
+	              			<input type="text" name="query" placeholder="Search" title="Enter search keyword" >
 	      					<button type="submit" title="Search"><i class="bi bi-search"></i></button>
 	      				</form>
+	      			  </div>
 	      			</div>
 					<c:if test="${sessionScope.login != null}">
-						<a href="http://localhost:8080/write" class="btn btn-light" style="color:#012970;">글쓰기</a>
+					  <div id="detail-btn-box">
+						<a href="http://localhost:8080/write" class="btn btn-light" style="color:#012970; float:right;">글쓰기</a>
+					  </div>
 					</c:if>
               		
               	</div>
@@ -532,35 +531,35 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <th scope="row"><a href="#"><img src="/resources/img/product-1.jpg" alt=""></a></th>
+                        <th scope="row"><a href="#"></a></th>
                         <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas nulla</a></td>
                         <td>$64</td>
                         <td class="fw-bold">124</td>
                         <td>$5,828</td>
                       </tr>
                       <tr>
-                        <th scope="row"><a href="#"><img src="/resources/img/product-2.jpg" alt=""></a></th>
+                        <th scope="row"><a href="#"></a></th>
                         <td><a href="#" class="text-primary fw-bold">Exercitationem similique doloremque</a></td>
                         <td>$46</td>
                         <td class="fw-bold">98</td>
                         <td>$4,508</td>
                       </tr>
                       <tr>
-                        <th scope="row"><a href="#"><img src="/resources/img/product-3.jpg" alt=""></a></th>
+                        <th scope="row"><a href="#"></a></th>
                         <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a></td>
                         <td>$59</td>
                         <td class="fw-bold">74</td>
                         <td>$4,366</td>
                       </tr>
                       <tr>
-                        <th scope="row"><a href="#"><img src="/resources/img/product-4.jpg" alt=""></a></th>
+                        <th scope="row"><a href="#"></a></th>
                         <td><a href="#" class="text-primary fw-bold">Officiis quaerat sint rerum error</a></td>
                         <td>$32</td>
                         <td class="fw-bold">63</td>
                         <td>$2,016</td>
                       </tr>
                       <tr>
-                        <th scope="row"><a href="#"><img src="/resources/img/product-5.jpg" alt=""></a></th>
+                        <th scope="row"><a href="#"></a></th>
                         <td><a href="#" class="text-primary fw-bold">Sit unde debitis delectus repellendus</a></td>
                         <td>$79</td>
                         <td class="fw-bold">41</td>
@@ -673,31 +672,26 @@
 
               <div class="news">
                 <div class="post-item clearfix">
-                  <img src="/resources/img/news-1.jpg" alt="">
                   <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
                   <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
                 </div>
 
                 <div class="post-item clearfix">
-                  <img src="/resources/img/news-2.jpg" alt="">
                   <h4><a href="#">Quidem autem et impedit</a></h4>
                   <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
                 </div>
 
                 <div class="post-item clearfix">
-                  <img src="/resources/img/news-3.jpg" alt="">
                   <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
                   <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
                 </div>
 
                 <div class="post-item clearfix">
-                  <img src="/resources/img/news-4.jpg" alt="">
                   <h4><a href="#">Laborum corporis quo dara net para</a></h4>
                   <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...</p>
                 </div>
 
                 <div class="post-item clearfix">
-                  <img src="/resources/img/news-5.jpg" alt="">
                   <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
                   <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...</p>
                 </div>

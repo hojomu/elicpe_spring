@@ -38,6 +38,10 @@ public class BoardServiceImpl implements BoardService{
 		return bm.detail(board);
 	}
 	
+	// 글 수정  페이지로 이동
+	public BoardVO goModify(BoardVO board) {
+		return bm.detail(board);
+	}
 	// BoardService에서 설계된 modify 추상 메서드 구현
 	public void modify(BoardVO board) {
 		bm.modify(board);

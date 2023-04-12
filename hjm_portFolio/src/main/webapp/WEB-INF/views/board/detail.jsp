@@ -423,8 +423,12 @@
 					
 							<c:set var="article_id" value="${detail.id}" />
 							<c:if test="${article_id eq sessionScope.login}">
-							<input id="modifybtn" class="btn btn-light" type="button" value="수정">
-							<input id="removebtn" class="btn btn-light" type="submit" value="삭제" formaction="/board/remove">
+								<div id="detail-btn-box">
+								<div id="detail-btn-box-right">
+									<input id="modifybtn" class="btn btn-light" type="button" value="수정" onClick="location.href='http://localhost:8080/board/modify?board_no=${detail.board_no}'">
+									<input id="removebtn" class="btn btn-light" type="submit" value="삭제" formaction="/board/remove">
+								</div>
+								</div>
 							</c:if>
 							<input type="hidden" id="modifycomplete" value="수정 완료" formaction="/board/modify">
 						</form> 
@@ -432,7 +436,7 @@
 					
 					<div id="reply-box">
 						<div id="reply-start">
-							<h3>댓글</h3>
+							<h4>댓글</h4>
 						</div>
 					                
 						<div>
@@ -443,12 +447,12 @@
 							<div id="replyPage"></div>
 					    
 					    <c:if test="${sessionScope.login != null }">            	
-							<div><label>댓글 쓰기</label></div>
+							<div><h4>댓글 쓰기</h4></div>
 							<div>
 								<textarea rows="3" cols="50" id="replycontents"></textarea>
 							</div>
 							<div>
-								<input type="button" value="댓글쓰기" id="add">
+								<input class="btn btn-light" type="button" value="댓글쓰기" id="add">
 							</div>
 					    </c:if>            	
 						</div>
@@ -496,27 +500,29 @@
   <!-- Template Main JS File -->
   <script src="/resources/js/main.js"></script>
                 
-         <script>
-         	const modifybtn = document.getElementById("modifybtn");
-         	const titleinput = document.getElementById("titleinput");
-         	const contentsinput = document.getElementById("contentsinput");
-         	const modifycomplete = document.getElementById("modifycomplete");      	
-         	const tohidden = document.querySelectorAll(".tohidden");
-         	const removebtn = document.getElementById("removebtn");
+<!--   글 수정 버튼 구버전
+   <script>
+    const modifybtn = document.getElementById("modifybtn");
+    const titleinput = document.getElementById("titleinput");
+    const contentsinput = document.getElementById("contentsinput");
+    const modifycomplete = document.getElementById("modifycomplete");      	
+    const tohidden = document.querySelectorAll(".tohidden");
+    const removebtn = document.getElementById("removebtn");
          	
-         	modifybtn.addEventListener("click", function() {
+    modifybtn.addEventListener("click", function() {
          		
-         		titleinput.setAttribute("type","text");
-         		contentsinput.style.display = "block";
-         		modifybtn.style.display = "none";
-         		modifycomplete.setAttribute("type", "submit");
-         		removebtn.setAttribute("type","hidden");
+     titleinput.setAttribute("type","text");
+     contentsinput.style.display = "block";
+     modifybtn.style.display = "none";
+     modifycomplete.setAttribute("type", "submit");
+     removebtn.setAttribute("type","hidden");
          		
-         		for (let i = 0; i < tohidden.length; i++){
-         			tohidden[i].style.display = "none";
-         		}
-         	});
-         </script>
+     for (let i = 0; i < tohidden.length; i++){
+      tohidden[i].style.display = "none";
+     }
+    });
+   </script> -->
+   
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script type="text/javascript" src="/resources/js/reply.js"></script>
 </body>

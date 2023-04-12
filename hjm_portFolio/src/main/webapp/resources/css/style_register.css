@@ -1243,7 +1243,7 @@ hojomu css
 
 /* 게시판 검색바 css */
 .main .board-search-form{
-	width: 30%;
+	width: 100%;
 }
 
 .main .board-search-form input{
@@ -1307,6 +1307,7 @@ hojomu css
 	color:#333;
 }
 
+
 /* 댓글창 css */
 #reply-box{
 	border-top:1px solid #ebecef;
@@ -1319,7 +1320,8 @@ hojomu css
 }
 
 .reply-detail .update,
-.reply-detail .remove{
+.reply-detail .remove,
+.reply-detail .updateOpen{
 	font-size: 0.7rem;
 	padding: 4px 8px 4px 8px;
 }
@@ -1328,7 +1330,7 @@ hojomu css
 	font-weight:600;
 }
 
-.reply-content{
+.li-mar-t_b-5{
 	margin:5px 0 ;
 }
 #replyUL > li{
@@ -1337,6 +1339,10 @@ hojomu css
 
 #replyUL > li:first-child{
 	border-top: none;
+}
+
+#reply-content{
+	width:80%;
 }
 
 /* 로그인 버튼 css */
@@ -1358,5 +1364,37 @@ hojomu css
   border: 1px solid #0563bb;
 }
 
+/* 게시판 디테일 세부 css */
+#detail-btn-box{
+	position:relative;
+}
+
+#detail-btn-box:after{
+	clear:both;
+	content:"";
+	display:block;
+}
+
+#detail-btn-box-right{
+	float:right;
+}
 
 
+/* 전체 수정 css */
+.flex-center-align{
+	justify-content: center;
+    align-items: center;
+}
+
+.flex-right-align{
+	justify-content: right;
+}
+.box-get-weight:after{
+	clear:both;
+	content:"";
+	display:block;
+}
+
+.dis-none{
+	display: none;
+}
