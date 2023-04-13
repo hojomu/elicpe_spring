@@ -408,6 +408,25 @@
 						<input type="submit" value="글쓰기">
 					</form>
 				</div>
+				
+				<!-- 동기식 파일전송
+				<div class="card-body">
+					<form action="uploadFormAction" method="post" enctype="multipart/form-data">
+						<input type="file" name="uploadFile" multiple >
+						<input type="submit" value="동기식 파일전송">
+					</form>
+				</div>
+				 -->
+				<!-- 비동기식 파일 전송 -->
+				<div class="card-body">
+					<input type="file" name="uploadFile" multiple >
+					<input type="button" id="uploadBtn" value="파일전송">
+					<div id="uploadResult">
+						<ul>
+							
+						</ul>	
+					</div>
+				</div>
 
               </div>
             </div><!-- 자유게시판 끝 -->			
@@ -464,6 +483,9 @@
   <!-- Template Main JS File -->
   <script src="/resources/js/main.js"></script>
 
+  <!-- jquery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="/resources/js/uploadAjax.js"></script>
 
 
 

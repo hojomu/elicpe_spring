@@ -1,5 +1,9 @@
 package hjm.portfolio.model;
 
+import java.util.ArrayList;
+
+import hjm.portfolio.model.AttachFileVO;
+
 public class BoardVO {
 	
 	private int board_no;
@@ -11,6 +15,8 @@ public class BoardVO {
 	private int likes;
 	private int counts;
 	
+	// AttachFileVo(파일업로드 관련 model)
+	private ArrayList<AttachFileVO> attach;
 
 	public int getBoard_no() {
 		return board_no;
@@ -64,6 +70,13 @@ public class BoardVO {
 	@Override
 	public String toString() {
 		return "BoardVO > board_no="+board_no + ", title="+title+", contents="+contents+", id="+id;
+	}
+	
+	public ArrayList<AttachFileVO> getAttach() {
+		return attach;
+	}
+	public void setAttach(ArrayList<AttachFileVO> attach) {
+		this.attach = attach;
 	}
 	
 	

@@ -60,8 +60,15 @@ $(document).ready(function(){	// jquery 준비...
 		list({board_no:board_noValue,page:pageValue});
 	})
 	
-	$("#chat").on("click",".updateOpen",function(){
+	// 글삭제 확인 이벤트
+	$("#removebtn").on("click",function(e){
+		var confirmed = confirm("정말로 글을 삭제 하시겠습니까?");
 		
+		if(confirmed){
+			
+		} else{
+			e.preventDefault();
+		}
 	})
 
 
@@ -118,22 +125,22 @@ function list(param){// list함수 선언 시작
 			str+="<div class='reply-id'><span>"+data.list[i].id+"</span></div>"
 			str+="<div class='li-mar-t_b-5' id='reply-content-view'>"+data.list[i].content+"</div>"
 			str+="<textarea class='dis-none' id='reply-content'"+data.list[i].rno+" row='3' data-reno="+data.list[i].rno+">"+data.list[i].content+"</textarea>"
-			var reply_id = data.list[i].id
+			/*var reply_id = data.list[i].id
 			$.ajax({
 				type: "POST",
 				url: "/getSessionData",
 				success: function(user_id){
 					if (user_id == reply_id){
 						console.log(user_id);
-						console.log(reply_id);
+						console.log(reply_id);*/
 			str+="<div class='reply-btn'>"
 			str+="<input class='update btn btn-light dis-none' type='button' value='제출' data-reno="+data.list[i].rno+">"
 			str+="<input class='updateOpen btn btn-light' type='button' value='수정' data-rno="+data.list[i].rno+">"
 			str+="<input class='remove btn btn-light' type='button' value='삭제' data-rno="+data.list[i].rno+">"
 			str+="</div>"
-					}
+					/*}
 				}
-			});
+			});*/
 			str+="</div></li>"
 		}
 		
