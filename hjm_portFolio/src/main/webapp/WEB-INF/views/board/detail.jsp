@@ -420,7 +420,13 @@
 							
 							<div class="tohidden">${detail.contents}</div>
 							<textarea id="contentsinput" rows="30" cols="80" style="display:none" name="contents">${detail.contents}</textarea>
-					
+							
+							<div id="uploadResult">
+								<ul>
+									
+								</ul>	
+							</div>
+							
 							<c:set var="article_id" value="${detail.id}" />
 							<c:if test="${article_id eq sessionScope.login}">
 								<div id="detail-btn-box">
@@ -432,6 +438,8 @@
 							</c:if>
 							<input type="hidden" id="modifycomplete" value="수정 완료" formaction="/board/modify">
 						</form> 
+						
+						
 					</div>
 					
 					<div id="reply-box">
@@ -525,5 +533,6 @@
    
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script type="text/javascript" src="/resources/js/reply.js"></script>
+		<script type="text/javascript" src="/resources/js/attach.js"></script>
 </body>
 </html>

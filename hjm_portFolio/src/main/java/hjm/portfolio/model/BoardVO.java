@@ -69,7 +69,7 @@ public class BoardVO {
 	
 	@Override
 	public String toString() {
-		return "BoardVO > board_no="+board_no + ", title="+title+", contents="+contents+", id="+id;
+		return "BoardVO > board_no="+board_no + ", title="+title+", contents="+contents+", id="+id+", attach=" +attach;
 	}
 	
 	public ArrayList<AttachFileVO> getAttach() {

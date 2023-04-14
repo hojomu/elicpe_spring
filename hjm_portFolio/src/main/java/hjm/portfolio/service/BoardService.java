@@ -2,6 +2,7 @@ package hjm.portfolio.service;
 
 import java.util.ArrayList;
 
+import hjm.portfolio.model.AttachFileVO;
 import hjm.portfolio.model.BoardVO;
 import hjm.portfolio.model.CriteriaVO;
 
@@ -26,4 +27,7 @@ public interface BoardService {
 	
 	// 글 삭제 설계
 	public void remove(BoardVO board);
+	
+	// 첨부파일 조회 설계
+	public ArrayList<AttachFileVO> attachlist (int board_no);
 }

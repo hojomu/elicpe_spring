@@ -215,9 +215,17 @@
 
         <li class="nav-item dropdown pe-3">
 
-          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="/resources/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+           <c:choose>
+			  <c:when test="${sessionScope.login == null }">
+			  <button class="main-login-btn" type="button" onclick="location.href='http://localhost:8080/login'">로그인</button>
+			  </c:when>
+			  <c:when test="${sessionScope.login != null }">
+		          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+		            <img src="/resources/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+		            <span class="d-none d-md-block dropdown-toggle ps-2">${sessionScope.login }</span>
+		          </a>
+			  </c:when>
+          </c:choose>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -400,13 +408,16 @@
               <div class="card recent-sales overflow-auto">
 
 				<div class="card-body">
+				
 					<h5 class="card-title">글쓰기 <span>| <%= id %></span></h5>
-					<form action="write" method="post">
+					
+					<form id="writeForm" action="write" method="post">
 						제목 <input type="text" name="title"><br>
 						<textarea id="ckeditor" name="contents"></textarea>
 						<input type="hidden" name="id" value=<%= id %>>
 						<input type="submit" value="글쓰기">
 					</form>
+					
 				</div>
 				
 				<!-- 동기식 파일전송
@@ -417,6 +428,8 @@
 					</form>
 				</div>
 				 -->
+				 
+				 
 				<!-- 비동기식 파일 전송 -->
 				<div class="card-body">
 					<input type="file" name="uploadFile" multiple >
