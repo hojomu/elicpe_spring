@@ -405,6 +405,7 @@
 						제목 <input type="text" name="title" value="${detail.title}"><br>
 						<textarea id="ckeditor" name="contents">${detail.contents}</textarea>
 						<input type="hidden" name="id" value=<%= id %>>
+						<input type="hidden" name="board_no" value="${detail.board_no}">
 						<input type="submit" value="완료">
 					</form>
 				</div>

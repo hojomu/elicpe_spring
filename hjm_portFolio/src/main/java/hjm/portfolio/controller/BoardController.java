@@ -68,6 +68,7 @@ public class BoardController {
 	// 게시글 수정 기능
 	@RequestMapping(value = "/board/modify.do", method = RequestMethod.POST)
 	public String modify(BoardVO board, RedirectAttributes rttr) {
+		System.out.println(board);
 		bs.modify(board);
 		System.out.println(board);
 		rttr.addAttribute("board_no", board.getBoard_no());
