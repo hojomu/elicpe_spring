@@ -115,7 +115,7 @@ function list(param){// list함수 선언 시작
 	
 	
 	$.getJSON("/replies/"+board_no+"/"+page+".json",function(data){
-		
+		console.log(data);
 		var str="";
 		
 		for(var i=0;i<data.list.length;i++){
